@@ -18,12 +18,16 @@ $(document).ready(function(){
       success: function(data){
         var weather = data.forecast.simpleforecast.forecastday;
         var city = data.current_observation.display_location.full;
+        var wPicUrl = data.current_observation.icon_url;
+        var newWPic = $("<img>").attr("src", wPicUrl);
         var newDiv = $("<div>").addClass("collapsible-body grey lighten-2");
 
+        console.log(wPicUrl);
         console.log(city);
         console.log(weather);
         //make a new collapsible body and append it to this header
-        $(newDiv).append("<h4>Weather in " + city + "</h4>");
+        $(newDiv).append("<h4>Weather in " + city + "</h4>")
+          .append(newWPic);
 
         for(i=0; i<weather.length; i++){
           var newConditions = ("<h5 class='flow-text'>Conditions for " + weather[i].date.pretty + ": " + weather[i].conditions + " with a high of " + weather[i].high.fahrenheit + "f, and a low of " + weather[i].low.fahrenheit + "f</h5>");
